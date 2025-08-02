@@ -50,6 +50,18 @@ app.post("/api/clients", async (req, res) => {
       
 })
 
+app.delete("/api/clients/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Client.findByIdAndDelete(id);
+        res.status(200).json({ message: "Client successfully deleted!"})
+    } catch(error) {
+        res.status(500).json({
+            message: "Error deleting Client!"
+        })
+    }
+})
+
 app.get('/api/data', (req, res) => {
     res.json({ message: 'Hello from the backend!'});
 });
